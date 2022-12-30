@@ -1,10 +1,10 @@
 import React from "react";
-import Card from "../components/Card";
+import PostListing from "../components/PostListing";
 
 const Index = () => {
   return (
     <div>
-      <Card />
+      <PostListing />
     </div>
   );
 };
