@@ -1,39 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { apis } from "./apis";
-import { CONSTANTS } from "./constants";
-import { getRandomColor, maxChar } from "./utils";
-const PostListing = () => {
-  const [posts, setPosts] = useState([]);
-  const [colorCode, setColorCode] = useState([]);
-
-  useEffect(() => {
-    apis(CONSTANTS.apis.GET, "https://jsonplaceholder.typicode.com/posts").then(
-      (resp) => updateColorCodeAndPosts(resp)
-    );
-    return () => {};
-  }, []);
-
-  const updateColorCodeAndPosts = (data) => {
-    let generatedColorCode = [];
-    data.map((data) => {
-      if (!generatedColorCode.find((x) => x.userId === data.userId)) {
-        generatedColorCode.push({
-          userId: data.userId,
-          cardColor: getRandomColor(),
-        });
-      }
-    });
-    setPosts(data);
-    setColorCode(generatedColorCode);
-  };
-
-  const pickColor = (id) => {
-    let selectColorCode = colorCode.filter((val) => val.userId === id);
-    return selectColorCode[0]?.cardColor;
-  };
-
+import { CONSTANTS } from "../components/constants";
+import {  maxChar } from "../components/utils";
+const PostCardListing = (props) => {
+  const {posts, colorCode, pickColor} = props
   return (
     <div>
       <Row>
@@ -70,4 +41,4 @@ const PostListing = () => {
     </div>
   );
 };
-export default PostListing;
+export default PostCardListing;
