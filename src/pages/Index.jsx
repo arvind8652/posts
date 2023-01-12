@@ -36,7 +36,6 @@ const Index = () => {
   };
   return (
     <div>
-      fdfd
       <PostTableListing
         posts={posts}
         colorCode={colorCode}
