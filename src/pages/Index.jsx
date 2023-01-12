@@ -36,9 +36,17 @@ const Index = () => {
   };
   return (
     <div>
-      <PostTableListing posts = {posts} colorCode={colorCode} pickColor={pickColor} />
-      <PostCardListing posts = {posts} colorCode={colorCode} pickColor={pickColor} />
-
+      fdfd
+      <PostTableListing
+        posts={posts}
+        colorCode={colorCode}
+        pickColor={pickColor}
+      />
+      <PostCardListing
+        posts={posts}
+        colorCode={colorCode}
+        pickColor={pickColor}
+      />
     </div>
   );
 };
