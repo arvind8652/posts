@@ -6,5 +6,9 @@ export const CONSTANTS = {
     cardMaxDataCount:{
         TITLE:20,
         BODY:150
+    },
+    postDataViewFormat:{
+        CARDVIEW:"CARDVIEW",
+        TABLEVIEW:"TABLEVIEW"
     }
 }
