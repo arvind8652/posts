@@ -10,5 +10,8 @@ export const CONSTANTS = {
     postDataViewFormat:{
         CARDVIEW:"CARDVIEW",
         TABLEVIEW:"TABLEVIEW"
+    },
+    inputFieldsArrayList:{
+        CREATE_NEW_POST_FIELDS:"CREATE_NEW_POST_FIELDS"
     }
 }

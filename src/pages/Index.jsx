@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
 import { apis } from "../components/apis";
 import { CONSTANTS } from "../components/constants";
 import { getRandomColor } from "../components/utils";
+import CreateNewPost from "./CreateNewPost";
 import PostCardListing from "./PostCardListing";
 import PostTableListing from "./PostTableListing";
 
@@ -78,7 +79,9 @@ const Index = () => {
 
   return (
     <Row>
-      <Col md={4}>adsas</Col>
+      <Col md={4}>
+        <CreateNewPost />
+      </Col>
       <Col>
         {switchBUtton()}
         {postDataViewFormat === CONSTANTS.postDataViewFormat.TABLEVIEW ? (
