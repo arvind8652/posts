@@ -1,10 +1,11 @@
-import React from "react";
-import { Col, Row } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import { CONSTANTS } from "../components/constants";
-import {  maxChar } from "../components/utils";
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import { CONSTANTS } from '../components/constants';
+import { maxChar } from '../components/utils';
 const PostCardListing = (props) => {
-  const {posts, colorCode, pickColor} = props
+  const { posts, colorCode, pickColor, showModalHandler } = props;
+
   return (
     <div>
       <Row>
@@ -15,10 +16,11 @@ const PostCardListing = (props) => {
               <Col key={data.id}>
                 <Card
                   style={{
-                    width: "18rem",
-                    marginBottom: "3rem",
-                    backgroundColor: pickColor(data.userId) || "white",
+                    width: '18rem',
+                    marginBottom: '3rem',
+                    backgroundColor: pickColor(data.userId) || 'white',
                   }}
+                  onClick={() => showModalHandler(data.id)}
                 >
                   <Card.Body>
                     <Card.Title>

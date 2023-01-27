@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
-import { apis } from "../components/apis";
-import { CONSTANTS } from "../components/constants";
-import { getRandomColor } from "../components/utils";
-import CreateNewPost from "./CreateNewPost";
-import PostCardListing from "./PostCardListing";
-import PostTableListing from "./PostTableListing";
+import React, { useEffect, useState } from 'react';
+import { Button, ButtonGroup, Col, Row } from 'react-bootstrap';
+import { apis } from '../components/apis';
+import { CONSTANTS } from '../components/constants';
+import CustomModals from '../components/customModals';
+import { getRandomColor } from '../components/utils';
+import CreateNewPost from './CreateNewPost';
+import PostCardListing from './PostCardListing';
+import PostTableListing from './PostTableListing';
 
 const Index = () => {
   const [posts, setPosts] = useState([]);
@@ -13,13 +14,22 @@ const Index = () => {
   const [postDataViewFormat, setPostDataViewFormat] = useState(
     CONSTANTS.postDataViewFormat.CARDVIEW
   );
+  const [showModal, setshowModal] = useState(false);
+  const [singlePost, setSinglePost] = useState({});
 
   useEffect(() => {
-    apis(CONSTANTS.apis.GET, "https://jsonplaceholder.typicode.com/posts").then(
+    apis(CONSTANTS.apis.GET, 'https://jsonplaceholder.typicode.com/posts').then(
       (resp) => updateColorCodeAndPosts(resp)
     );
     return () => {};
   }, []);
+
+  const closeModalHandler = () => setshowModal(false);
+  const showModalHandler = (id) => {
+    apis(CONSTANTS.apis.GET, 'https://jsonplaceholder.typicode.com/posts/' + id)
+      .then((resp) => setSinglePost(resp))
+      .then(() => setshowModal(true));
+  };
 
   const updateColorCodeAndPosts = (data) => {
     let generatedColorCode = [];
@@ -44,6 +54,7 @@ const Index = () => {
     posts,
     colorCode,
     pickColor,
+    showModalHandler,
   };
 
   const switchBUtton = () => {
@@ -56,8 +67,8 @@ const Index = () => {
         <Button
           variant={
             postDataViewFormat === CONSTANTS.postDataViewFormat.CARDVIEW
-              ? "primary"
-              : "secondary"
+              ? 'primary'
+              : 'secondary'
           }
           value={CONSTANTS.postDataViewFormat.CARDVIEW}
         >
@@ -66,8 +77,8 @@ const Index = () => {
         <Button
           variant={
             postDataViewFormat === CONSTANTS.postDataViewFormat.TABLEVIEW
-              ? "primary"
-              : "secondary"
+              ? 'primary'
+              : 'secondary'
           }
           value={CONSTANTS.postDataViewFormat.TABLEVIEW}
         >
@@ -78,19 +89,27 @@ const Index = () => {
   };
 
   return (
-    <Row>
-      <Col md={4}>
-        <CreateNewPost />
-      </Col>
-      <Col>
-        {switchBUtton()}
-        {postDataViewFormat === CONSTANTS.postDataViewFormat.TABLEVIEW ? (
-          <PostTableListing {...commonProps} />
-        ) : (
-          <PostCardListing {...commonProps} />
-        )}
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col md={4}>
+          <CreateNewPost />
+        </Col>
+        <Col>
+          {switchBUtton()}
+          {postDataViewFormat === CONSTANTS.postDataViewFormat.TABLEVIEW ? (
+            <PostTableListing {...commonProps} />
+          ) : (
+            <PostCardListing {...commonProps} />
+          )}
+        </Col>
+      </Row>
+
+      <CustomModals
+        closeModalHandler={closeModalHandler}
+        showModal={showModal}
+        modalData={singlePost}
+      />
+    </>
   );
 };
 
