@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { apis } from '../components/apis';
 import { CONSTANTS } from '../components/constants';
 import { inputFields } from '../components/inputFields';
+import { genericSubmitButton } from '../components/utils';
 
 const initalVal = {
   title: '',
@@ -47,9 +48,7 @@ const CreateNewPost = () => {
     <>
       <Form onSubmit={onSubmitHandler}>
         {fieldsHandler()}
-        <Button variant='primary' type='submit'>
-          Submit
-        </Button>
+        {genericSubmitButton()}
       </Form>
     </>
   );
