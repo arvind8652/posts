@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Col, Row } from 'react-bootstrap';
 import { apis } from '../components/apis';
 import { CONSTANTS } from '../components/constants';
-import CustomModals from '../components/customModals';
+import PostDetailModal from './modals/PostDetailModal';
 import { getRandomColor } from '../components/utils';
 import CreateNewPost from './CreateNewPost';
 import PostCardListing from './PostCardListing';
@@ -104,7 +104,7 @@ const Index = () => {
         </Col>
       </Row>
 
-      <CustomModals
+      <PostDetailModal
         closeModalHandler={closeModalHandler}
         showModal={showModal}
         modalData={singlePost}
