@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import accordion from '../../components/accordion'
 
-const PostDetailModal = ({closeModalHandler,showModal, modalData}) => {
+const PostDetailModal = ({closeModalHandler,showModal, modalData,commentsData}) => {
   console.log(modalData)
   return (
     <Modal show={showModal} onHide={closeModalHandler}>
@@ -12,7 +12,10 @@ const PostDetailModal = ({closeModalHandler,showModal, modalData}) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>{modalData.body}
-        {accordion()}
+        <br/>
+        <br/>
+        <b>Comments</b>
+        {commentsData?.map((data)=>accordion(data))}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModalHandler}>

@@ -16,6 +16,7 @@ const Index = () => {
   );
   const [showModal, setshowModal] = useState(false);
   const [singlePost, setSinglePost] = useState({});
+  const [singlePostComments, setSinglePostComments] = useState([]);
 
   useEffect(() => {
     apis(CONSTANTS.apis.GET, 'https://jsonplaceholder.typicode.com/posts').then(
@@ -26,8 +27,15 @@ const Index = () => {
 
   const closeModalHandler = () => setshowModal(false);
   const showModalHandler = (id) => {
-    apis(CONSTANTS.apis.GET, 'https://jsonplaceholder.typicode.com/posts/' + id)
-      .then((resp) => setSinglePost(resp))
+    apis(
+      CONSTANTS.apis.GET,
+      'https://jsonplaceholder.typicode.com/posts/' + id
+    ).then((resp) => setSinglePost(resp));
+    apis(
+      CONSTANTS.apis.GET,
+      'https://jsonplaceholder.typicode.com/posts/' + id + '/comments'
+    )
+      .then((resp) => setSinglePostComments(resp))
       .then(() => setshowModal(true));
   };
 
@@ -108,6 +116,7 @@ const Index = () => {
         closeModalHandler={closeModalHandler}
         showModal={showModal}
         modalData={singlePost}
+        commentsData={singlePostComments}
       />
     </>
   );
